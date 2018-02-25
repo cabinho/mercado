@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:maskMoney="http://"
+	  layout:decorator="layout/LayoutPadrao">
+	  
+	
+	
+<head>
+	<title>Cadastro credito</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>
+				Cadastro de credito
+			</h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+	
+		<div class="alert  alert-success  alert-dismissible" role="alert" th:if="${not #strings.isEmpty(mensagem)}" >
+			<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+			<span th:text="${mensagem}"></span>
+		</div>
+		
+        	
+		<form method="POST" th:object="${credito}" class="form-vertical  js-form-loading" th:action="@{/creditos/novo}">
+			<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<th:block th:each="erro : ${#fields.detailedErrors()}">
+					<div>
+						<i class="fa  fa-exclamation-circle"></i> 
+						<span th:text="${erro.message}">Já existe um produto com o nome informado.</span>
+					</div>
+				</th:block>
+			</div>
+		
+			
+			
+<!--  		<div class="row">-->	
+				<div class="col-sm-2  form-group" th:classappend="${#fields.hasErrors('banco')} ? has-error">
+					<label for="banco" class="control-label">Banco</label>
+					<select id="banco" class="form-control" th:field="*{banco}">
+						<option value="">Selecione o banco</option>
+					  	<option th:each="banco : ${bancos}" th:value="${banco}" th:text="${banco.descricao}"></option> 
+					</select>
+				</div>
+			
+			
+			<div class="row">				
+		 		<div class="col-sm-2  form-group" th:classappend="${#fields.hasErrors('data')} ? has-error">
+					<label for="data" class="control-label">Data</label>
+			         <input id="data" type="text" class="form-control date_format(data,‘%d/%m/%Y’)" th:field="*{data}"/>
+				 </div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-2  form-group" th:classappend="${#fields.hasErrors('valor')} ? has-error">
+					<label for="valor" class="control-label">Valor</label>
+					<i class="text-right"></i> 
+		  			<input id="valor"   type="text"  class="form-control" th:field="*{valor}"/>  
+										
+				</div>
+			</div>
+		
+			<div class="form-group">
+				<div class="col-sm-offset-4 col-sm-10"></div>
+				<button class="btn  btn-primary" type="submit">Salvar</button>
+			</div>
+	
+		</form>
+	</div>
+	
+<script>
+  $(function() {
+    $('#valor').maskMoney({ prefix: '', allowNegative: true, thousands: '', decimal: '.'})
+  })
+</script>
+
+</section>
+</body>
+
+</html>

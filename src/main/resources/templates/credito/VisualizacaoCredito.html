@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/LayoutPadrao">
+	
+<head>
+	<title th:text="${credito.codigo}">Credito</title>
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/upload.min.css}"/>
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+
+		<div class="page-header">
+
+
+			<div class="container-fluid">
+				<div class="rol">
+  	                       <h1 th:text="${credito.codigo}">Credito</h1>
+					<div class="col-sm-3">
+						<ul class="list-group">
+						
+							<li class="list-group-item"
+								th:text="|Credito ${credito.banco.descricao}|"></li>
+							<li class="list-group-item" th:text="|${credito.data}|"></li>
+							<li class="list-group-item" th:text="${credito.valor}"></li>
+						</ul>
+					</div>
+					
+
+				</div>
+			</div>
+		</div>
+				<div class="form-group">
+						<div class="col-sm-offset-4 col-sm-10"></div>
+						<button class="btn  btn-primary" type="submit">excluir</button>
+					</div>
+		
+		
+	</section>
+
+	<th:block layout:fragment="javascript-extra">
+		<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
+		<script th:src="@{/javascripts/vendors/upload.min.js}"></script>
+	</th:block>
+
+</body>
+</html>
