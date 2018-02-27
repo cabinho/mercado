@@ -1,7 +1,7 @@
 package com.mercado.creditos.creditos.model;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -31,7 +31,7 @@ public class Credito {
 	private Banco banco;
 	
     @NotNull(message = "Data é obrigatória")
-   	private Date data;
+    private Date data;
 	
 	@NotNull(message = "Valor é obrigatório")
   //	@NumberFormat(pattern ="#,##0.00")
